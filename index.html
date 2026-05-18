@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Glosari Istilah Perubatan PKTAAB</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 40px auto;
+            max-width: 1000px;
+            padding: 0 20px;
+            color: #333;
+            background-color: #fcfbfe;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #7c3aed;
+            padding-bottom: 20px;
+        }
+        .header h1 { color: #5b21b6; margin-bottom: 5px; font-size: 28px; }
+        .header p { color: #6b7280; margin-top: 0; }
+        .search-container {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        #glossarySearch {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+        }
+        #glossarySearch:focus {
+            border-color: #7c3aed;
+            outline: none;
+            box-shadow: 0 4px 10px rgba(124, 58, 237, 0.15);
+        }
+        .counter {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: bold;
+        }
+        .glossary-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .glossary-table th, .glossary-table td {
+            border: 1px solid #e5e7eb;
+            padding: 14px 18px;
+            text-align: left;
+        }
+        .glossary-table th {
+            background-color: #7c3aed;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        .glossary-table tr:nth-child(even) { background-color: #f9fafb; }
+        .glossary-table tr:hover { background-color: #f3e8ff; }
+        .bi-term { color: #1f2937; font-weight: 700; }
+        .bm-term { color: #b45309; font-weight: 600; }
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            color: #9ca3af;
+            font-size: 16px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Pusat Kanser Tun Abdullah Ahmad Badawi (PKTAAB)</h1>
+    <p>Sistem Demo Enjin Carian Glosari Istilah Saintifik & Perubatan Dwibahasa</p>
+</div>
+
+<div class="search-container">
+    <input type="text" id="glossarySearch" onkeyup="filterGlossary()" placeholder="Taip istilah yang dicari... (Sistem menyokong carian dalam BI atau BM)">
+</div>
+
+<div class="counter" id="itemCount">Memaparkan semua 135 istilah</div>
+
+<table class="glossary-table" id="glossaryTable">
+    <thead>
+        <tr>
+            <th style="width: 25%;">Istilah Bahasa Inggeris</th>
+            <th style="width: 25%;">Istilah Bahasa Melayu</th>
+            <th style="width: 50%;">Makna dalam Bahasa Melayu</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><span class="bi-term">Biomedical</span></td><td><span class="bm-term">Biomedikal / Biomedik</span></td><td>Bidang yang menggabungkan prinsip sains biologi dengan perubatan klinikal.</td></tr>
+        <tr><td><span class="bi-term">Biomedical Imaging</span></td><td><span class="bm-term">Pengimejan Biomedikal</span></td><td>Teknik visualisasi bahagian dalam badan untuk diagnosis perubatan (cth: X-ray, MRI).</td></tr>
+        <tr><td><span class="bi-term">Toxicology</span></td><td><span class="bm-term">Toksikologi</span></td><td>Kajian tentang kesan buruk bahan kimia atau racun terhadap organisma hidup.</td></tr>
+        <tr><td><span class="bi-term">Palliative care</span></td><td><span class="bm-term">Penjagaan paliatif</span></td><td>Penjagaan khusus untuk pesakit penyakit kritikal bagi mengurangkan kesakitan dan meningkatkan kualiti hidup.</td></tr>
+        <tr><td><span class="bi-term">Transfusion</span></td><td><span class="bm-term">Transfusi / Pemindahan darah</span></td><td>Proses memindahkan darah atau komponen darah daripada penderma kepada penerima.</td></tr>
+        <tr><td><span class="bi-term">Microcredential</span></td><td><span class="bm-term">Mikrokredential</span></td><td>Kelayakan atau kursus mini yang mengesahkan kemahiran atau pengetahuan spesifik.</td></tr>
+        <tr><td><span class="bi-term">Brachytherapy</span></td><td><span class="bm-term">Brakiterapi</span></td><td>Rawatan kanser menggunakan sumber radiasi yang diletakkan di dalam atau berhampiran tumor.</td></tr>
+        <tr><td><span class="bi-term">Pediatric</span></td><td><span class="bm-term">Pediatrik</span></td><td>Bidang perubatan yang khusus untuk kesihatan dan penyakit kanak-kanak.</td></tr>
+        <tr><td><span class="bi-term">Oncology</span></td><td><span class="bm-term">Onkologi</span></td><td>Bidang perubatan yang mengkaji, mendiagnosis dan merawat penyakit kanser.</td></tr>
+        <tr><td><span class="bi-term">Radiotherapy</span></td><td><span class="bm-term">Radioterapi</span></td><td>Rawatan kanser menggunakan radiasi bertenaga tinggi untuk membunuh sel kanser.</td></tr>
+        <tr><td><span class="bi-term">Sarkoma</span></td><td><span class="bm-term">Sarkoma</span></td><td>Sejenis kanser yang bermula pada tisu penghubung seperti tulang, otot, atau lemak.</td></tr>
+        <tr><td><span class="bi-term">Oral</span></td><td><span class="bm-term">Mulut / Oral</span></td><td>Berkaitan dengan mulut atau pengambilan ubat melalui mulut.</td></tr>
+        <tr><td><span class="bi-term">Imaging</span></td><td><span class="bm-term">Pengimejan</span></td><td>Proses menghasilkan gambar organ atau struktur dalaman badan untuk tujuan perubatan.</td></tr>
+        <tr><td><span class="bi-term">Gynecology</span></td><td><span class="bm-term">Ginekologi</span></td><td>Bidang perubatan yang khusus berkaitan kesihatan sistem reproduksi wanita.</td></tr>
+        <tr><td><span class="bi-term">Esophagus</span></td><td><span class="bm-term">Esofagus</span></td><td>Saluran otot yang menghubungkan tekak dengan perut (saluran makanan).</td></tr>
+        <tr><td><span class="bi-term">Anaesthesiology</span></td><td><span class="bm-term">Anestesiologi</span></td><td>Bidang perubatan berkaitan pemberian bius (ubat tidur/kebas) sebelum dan semasa pembedahan.</td></tr>
+        <tr><td><span class="bi-term">Hepatopancreaticobiliari</span></td><td><span class="bm-term">Hepatopankreatobiliari</span></td><td>Berkaitan dengan organ hati, pankreas, pundi hempedu dan saluran hempedu.</td></tr>
+        <tr><td><span class="bi-term">Oncoplastic</span></td><td><span class="bm-term">Onkoplastik</span></td><td>Pembedahan kanser (terutamanya kanser payudara) yang menggabungkan pembuangan tumor dan pembetulan kosmetik.</td></tr>
+        <tr><td><span class="bi-term">Otolarhinolaringologi</span></td><td><span class="bm-term">Otolaringologi</span></td><td>Bidang perubatan berkaitan penyakit telinga, hidung dan tekak (ENT).</td></tr>
+        <tr><td><span class="bi-term">Endoscopy</span></td><td><span class="bm-term">Endoskopi</span></td><td>Prosedur melihat bahagian dalam organ badan menggunakan tiub fleksibel berkamera (endoskop).</td></tr>
+        <tr><td><span class="bi-term">Atriovenous fistula (AVF)</span></td><td><span class="bm-term">Fistula arteriovenous</span></td><td>Sambungan abnormal atau buatan antara arteri dan vena, biasanya dibuat untuk rawatan dialisis.</td></tr>
+        <tr><td><span class="bi-term">EHS (Environment, Health, Safety)</span></td><td><span class="bm-term">Alam Sekitar, Kesihatan, Keselamatan</span></td><td>Bidang atau jabatan yang bertanggungjawab menjaga keselamatan pekerja dan alam sekitar.</td></tr>
+        <tr><td><span class="bi-term">Urology</span></td><td><span class="bm-term">Urologi</span></td><td>Bidang perubatan berkaitan sistem urinari (saluran kencing) lelaki dan wanita, serta sistem reproduksi lelaki.</td></tr>
+        <tr><td><span class="bi-term">Orthopedic</span></td><td><span class="bm-term">Ortopedik</span></td><td>Bidang perubatan yang memfokuskan kepada sistem rangka, tulang, sendi dan otot.</td></tr>
+        <tr><td><span class="bi-term">Reconstructive</span></td><td><span class="bm-term">Rekonstruktif / Pembinaan semula</span></td><td>Pembedahan untuk memulihkan fungsi atau rupa bentuk struktur badan yang rosak.</td></tr>
+        <tr><td><span class="bi-term">Ophthalmology</span></td><td><span class="bm-term">Oftalmologi</span></td><td>Bidang perubatan berkaitan anatomi, fungsi dan penyakit mata.</td></tr>
+        <tr><td><span class="bi-term">Nephrology</span></td><td><span class="bm-term">Nefrologi</span></td><td>Bidang perubatan yang khusus mengkaji fungsi dan penyakit buah pinggang.</td></tr>
+        <tr><td><span class="bi-term">Primary immunodeficiency</span></td><td><span class="bm-term">Imunodefisiensi primer</span></td><td>Gangguan genetik sejak lahir yang menyebabkan sistem imun badan tidak berfungsi dengan baik.</td></tr>
+        <tr><td><span class="bi-term">Radiography</span></td><td><span class="bm-term">Radiografi</span></td><td>Teknik penghasilan imej (seperti X-ray) menggunakan sinaran radiasi.</td></tr>
+        <tr><td><span class="bi-term">Radiology</span></td><td><span class="bm-term">Radiologi</span></td><td>Cabang perubatan yang menggunakan pengimejan (X-ray, CT scan, dll) untuk diagnosis dan rawatan.</td></tr>
+        <tr><td><span class="bi-term">ALARA (As Low As Reasonably Achievable)</span></td><td><span class="bm-term">Seoptimum yang mungkin</span></td><td>Prinsip keselamatan radiasi untuk memastikan pendedahan radiasi diletakkan pada tahap paling minimum yang boleh dicapai.</td></tr>
+        <tr><td><span class="bi-term">Cone Beam Computed Tomography (CBCT)</span></td><td><span class="bm-term">Tomografi Berkomputer Alur Kon</span></td><td>Jenis imbasan CT khas yang menghasilkan imej 3D, sering digunakan dalam pergigian.</td></tr>
+        <tr><td><span class="bi-term">Orthopantomography (OPG)</span></td><td><span class="bm-term">Ortopantomografi</span></td><td>Imbakan sinar-X panorama yang menunjukkan keseluruhan gigi dan rahang dalam satu gambar.</td></tr>
+        <tr><td><span class="bi-term">Digital Breast Tomosynthesis Mammography</span></td><td><span class="bm-term">Mamografi Tomosintesis Payudara Digital</span></td><td>Teknik mamografi 3D termaju untuk mengesan kanser payudara dengan lebih tepat.</td></tr>
+        <tr><td><span class="bi-term">Ultrasonography</span></td><td><span class="bm-term">Ultrasonografi / Ultra bunyi</span></td><td>Teknik pengimejan menggunakan gelombang bunyi berfrekuensi tinggi (ultrabunyi).</td></tr>
+        <tr><td><span class="bi-term">Computed Tomography Scan (CT Scan)</span></td><td><span class="bm-term">Imbasan Tomografi Berkomputer</span></td><td>Prosedur imbasan sinar-X berkomputer yang menghasilkan imej keratan rentas badan.</td></tr>
+        <tr><td><span class="bi-term">Magnetic Resonance Imaging (MRI)</span></td><td><span class="bm-term">Pengimejan Resonans Magnetik</span></td><td>Teknik pengimejan menggunakan medan magnet kuat dan gelombang radio untuk melihat organ dalaman.</td></tr>
+        <tr><td><span class="bi-term">Mobile C-Arm / Fluoroscopy</span></td><td><span class="bm-term">C-Arm Mudah Alih / Fluoroskopi</span></td><td>Alat X-ray mudah alih berbentuk huruf 'C' yang menghasilkan imej video radiasi secara langsung semasa pembedahan.</td></tr>
+        <tr><td><span class="bi-term">Chemical Pathology</span></td><td><span class="bm-term">Patologi Kimia</span></td><td>Kajian perubahan biokimia dalam cecair badan (darah, air kencing) untuk mendiagnosis penyakit.</td></tr>
+        <tr><td><span class="bi-term">Genetic</span></td><td><span class="bm-term">Genetik</span></td><td>Berkaitan dengan gen, keturunan, dan variasi organisma.</td></tr>
+        <tr><td><span class="bi-term">Haematology</span></td><td><span class="bm-term">Hematologi</span></td><td>Kajian tentang darah, organ pembentuk darah, dan penyakit berkaitan darah.</td></tr>
+        <tr><td><span class="bi-term">Histopathology</span></td><td><span class="bm-term">Histopatologi</span></td><td>Pemeriksaan tisu badan di bawah mikroskop untuk mengkaji tanda-tanda penyakit (cth: kanser).</td></tr>
+        <tr><td><span class="bi-term">Cytology</span></td><td><span class="bm-term">Sitologi</span></td><td>Kajian tentang struktur, fungsi dan penyakit pada peringkat sel tunggal.</td></tr>
+        <tr><td><span class="bi-term">Microbiology</span></td><td><span class="bm-term">Mikrobiologi</span></td><td>Kajian tentang mikroorganisma seperti bakteria, virus, kulat dan parasit.</td></tr>
+        <tr><td><span class="bi-term">Immunology</span></td><td><span class="bm-term">Imunologi</span></td><td>Cabang sains perubatan yang mengkaji sistem pertahanan (imun) badan.</td></tr>
+        <tr><td><span class="bi-term">Molecular Diagnostic</span></td><td><span class="bm-term">Diagnostik Molekul</span></td><td>Teknik mengesan penyakit dengan menganalisis kod genetik (DNA/RNA) atau protein.</td></tr>
+        <tr><td><span class="bi-term">Arterial / Venous Blood gas</span></td><td><span class="bm-term">Gas Darah Arteri / Vena</span></td><td>Ujian darah untuk mengukur tahap oksigen, karbon dioksida dan tahap keasidan (pH) dalam darah.</td></tr>
+        <tr><td><span class="bi-term">Sodium</span></td><td><span class="bm-term">Natrium</span></td><td>Mineral penting (elektrolit) dalam darah yang mengawal keseimbangan air dalam badan.</td></tr>
+        <tr><td><span class="bi-term">Potassium</span></td><td><span class="bm-term">Kalium</span></td><td>Elektrolit yang penting untuk fungsi saraf dan pengecutan otot, terutamanya jantung.</td></tr>
+        <tr><td><span class="bi-term">Chloride</span></td><td><span class="bm-term">Klorida</span></td><td>Elektrolit yang membantu mengekalkan keseimbangan cecair dan tekanan osmosis dalam badan.</td></tr>
+        <tr><td><span class="bi-term">Urea</span></td><td><span class="bm-term">Urea</span></td><td>Bahan buangan hasil pemecahan protein yang dikumuhkan oleh buah pinggang melalui air kencing.</td></tr>
+        <tr><td><span class="bi-term">Creatinine</span></td><td><span class="bm-term">Kreatinin</span></td><td>Bahan buangan daripada metabolisme otot yang digunakan untuk menilai fungsi buah pinggang.</td></tr>
+        <tr><td><span class="bi-term">Uric Acid</span></td><td><span class="bm-term">Asid Urik</span></td><td>Bahan buangan daripada pencernaan purin; tahap tinggi boleh menyebabkan penyakit gaut.</td></tr>
+        <tr><td><span class="bi-term">Calcium</span></td><td><span class="bm-term">Kalsium</span></td><td>Mineral utama untuk pembentukan tulang dan gigi, serta fungsi otot dan pembekuan darah.</td></tr>
+        <tr><td><span class="bi-term">Inorganic Phosphate</span></td><td><span class="bm-term">Fosfat Tak Organik</span></td><td>Mineral yang bekerjasama dengan kalsium untuk membina tulang dan menghasilkan tenaga sel.</td></tr>
+        <tr><td><span class="bi-term">Total Protein</span></td><td><span class="bm-term">Jumlah Protein</span></td><td>Ujian mengukur jumlah keseluruhan protein (albumin dan globulin) dalam darah.</td></tr>
+        <tr><td><span class="bi-term">Albumin</span></td><td><span class="bm-term">Albumin</span></td><td>Protein utama dalam plasma darah yang dihasilkan oleh hati untuk mengekalkan cecair dalam saluran darah.</td></tr>
+        <tr><td><span class="bi-term">Albumin / Globulin ratio</span></td><td><span class="bm-term">Nisbah Albumin / Globulin</span></td><td>Perbandingan antara jumlah albumin dan globulin untuk menilai penyakit hati atau buah pinggang.</td></tr>
+        <tr><td><span class="bi-term">Alanine Aminotransferase (ALT)</span></td><td><span class="bm-term">Alanina Aminotransferase</span></td><td>Enzim yang ditemui terutamanya dalam hati; penanda utama kerosakan hati.</td></tr>
+        <tr><td><span class="bi-term">Aspartate Aminotransferase (AST)</span></td><td><span class="bm-term">Aspartat Aminotransferase</span></td><td>Enzim yang terdapat dalam hati dan jantung; meningkat jika ada kecederaan organ tersebut.</td></tr>
+        <tr><td><span class="bi-term">Alkaline Phosphatase (ALP)</span></td><td><span class="bm-term">Alkalina Fosfatas</span></td><td>Enzim berkaitan dengan hati dan tulang; penanda penyakit saluran hempedu atau tulang.</td></tr>
+        <tr><td><span class="bi-term">Total Bilirubin</span></td><td><span class="bm-term">Jumlah Bilirubin</span></td><td>Jumlah keseluruhan pigmen kuning dalam darah hasil pemecahan sel darah merah lama.</td></tr>
+        <tr><td><span class="bi-term">Direct Bilirubin</span></td><td><span class="bm-term">Bilirubin Terkonjugasi / Terus</span></td><td>Bilirubin yang telah diproses oleh hati dan sedia untuk dikumuhkan.</td></tr>
+        <tr><td><span class="bi-term">Total Cholesterol</span></td><td><span class="bm-term">Jumlah Kolesterol</span></td><td>Jumlah keseluruhan lemak kolesterol dalam darah (termasuk HDL dan LDL).</td></tr>
+        <tr><td><span class="bi-term">Triglyceride</span></td><td><span class="bm-term">Trigliserida</span></td><td>Sejenis lemak (lipid) dalam darah yang disimpan sebagai sumber tenaga badan.</td></tr>
+        <tr><td><span class="bi-term">High Density Lipoprotein (HDL)</span></td><td><span class="bm-term">Lipoprotein Ketumpatan Tinggi</span></td><td>Dikenali sebagai "kolesterol baik" kerana membantu menyingkirkan kolesterol dari saluran darah.</td></tr>
+        <tr><td><span class="bi-term">Low Density Lipoprotein (LDL)</span></td><td><span class="bm-term">Lipoprotein Ketumpatan Rendah</span></td><td>Dikenali sebagai "kolesterol jahat" kerana boleh menyumbat saluran darah jika terlalu tinggi.</td></tr>
+        <tr><td><span class="bi-term">Creatinine Kinase (CK)</span></td><td><span class="bm-term">Kreatinin Kinase</span></td><td>Enzim yang kaya dalam tisu otot; meningkat jika berlaku kerosakan otot atau jantung.</td></tr>
+        <tr><td><span class="bi-term">Lactate Dehydrogenase (LDH)</span></td><td><span class="bm-term">Laktat Dehidrogenase</span></td><td>Enzim yang terlibat dalam penghasilan tenaga; petanda kerosakan tisu badan secara am.</td></tr>
+        <tr><td><span class="bi-term">Glucose</span></td><td><span class="bm-term">Glukosa</span></td><td>Gula ringkas dalam darah yang menjadi sumber tenaga utama bagi sel badan.</td></tr>
+        <tr><td><span class="bi-term">HbA1c</span></td><td><span class="bm-term">HbA1c (Hemoglobin Terglikat)</span></td><td>Ujian darah yang menunjukkan purata paras gula darah pesakit bagi tempoh 2-3 bulan lepas.</td></tr>
+        <tr><td><span class="bi-term">Magnesium</span></td><td><span class="bm-term">Magnesium</span></td><td>Mineral penting untuk fungsi enzim, sistem saraf, dan kesihatan otot.</td></tr>
+        <tr><td><span class="bi-term">Osmolality</span></td><td><span class="bm-term">Osmolaliti</span></td><td>Ukuran kepekatan zarah pepejal yang larut dalam cecair (seperti darah atau urin).</td></tr>
+        <tr><td><span class="bi-term">Amylase</span></td><td><span class="bm-term">Amilas</span></td><td>Enzim yang dihasilkan oleh pankreas dan kelenjar liur untuk mencerna karbohidrat.</td></tr>
+        <tr><td><span class="bi-term">C-Reactive Protein (CRP)</span></td><td><span class="bm-term">Protein C-Reaktif</span></td><td>Protein yang dihasilkan oleh hati apabila terdapat radang atau jangkitan akut dalam badan.</td></tr>
+        <tr><td><span class="bi-term">CA 125</span></td><td><span class="bm-term">CA 125</span></td><td>Penanda tumor (protein dalam darah) yang digunakan untuk memantau kanser ovari.</td></tr>
+        <tr><td><span class="bi-term">CA 15-3</span></td><td><span class="bm-term">CA 15-3</span></td><td>Penanda tumor yang digunakan terutamanya untuk memantau kanser payudara.</td></tr>
+        <tr><td><span class="bi-term">Carcino Embryonic Antigen (CEA)</span></td><td><span class="bm-term">Antigen Karsinoembrionik</span></td><td>Penanda tumor dalam darah, sering dikaitkan dengan kanser usus (kolorektal).</td></tr>
+        <tr><td><span class="bi-term">Total Prostate Specific Antigen (TPSA)</span></td><td><span class="bm-term">Antigen Khusus Prostat Jumlah</span></td><td>Protein yang dihasilkan oleh kelenjar prostat; penanda untuk mengesan kanser prostat.</td></tr>
+        <tr><td><span class="bi-term">Alpha Feto Protein (AFP)</span></td><td><span class="bm-term">Alfa Feto Protein</span></td><td>Penanda tumor yang tinggi dalam kanser hati atau kanser testis/ovari tertentu.</td></tr>
+        <tr><td><span class="bi-term">Beta Human Chorionic Gonadotropin (BHCG)</span></td><td><span class="bm-term">Beta Gonadotropin Korionik Manusia</span></td><td>Hormon yang dikesan semasa kehamilan atau penanda tumor untuk kanser tertentu.</td></tr>
+        <tr><td><span class="bi-term">Thyroid Stimulating Hormone (TSH)</span></td><td><span class="bm-term">Hormon Merangsang tiroid</span></td><td>Hormon yang dirembeskan oleh otak untuk merangsang kelenjar tiroid menghasilkan hormon tiroid.</td></tr>
+        <tr><td><span class="bi-term">Free Thyroxine (FT4)</span></td><td><span class="bm-term">Tiroksina Bebas</span></td><td>Hormon aktif yang dihasilkan oleh kelenjar tiroid untuk mengawal metabolisme.</td></tr>
+        <tr><td><span class="bi-term">Free Triiodothyronine (FT3)</span></td><td><span class="bm-term">Triiodotironina Bebas</span></td><td>Bentuk hormon tiroid aktif lain yang mengawal fungsi tenaga badan.</td></tr>
+        <tr><td><span class="bi-term">Vitamin B12</span></td><td><span class="bm-term">Vitamin B12</span></td><td>Vitamin penting untuk pembentukan sel darah merah dan fungsi sistem saraf.</td></tr>
+        <tr><td><span class="bi-term">Ferritin</span></td><td><span class="bm-term">Feritin</span></td><td>Protein dalam sel yang berfungsi menyimpan zat besi di dalam badan.</td></tr>
+        <tr><td><span class="bi-term">Folate</span></td><td><span class="bm-term">Folat / Asid Folik</span></td><td>Vitamin B9 yang penting untuk penghasilan sel baru dan mencegah kecacatan janin.</td></tr>
+        <tr><td><span class="bi-term">Urine microscopy</span></td><td><span class="bm-term">Mikroskopi air kencing</span></td><td>Pemeriksaan mendapan air kencing di bawah mikroskop untuk melihat sel, kristal, atau bakteria.</td></tr>
+        <tr><td><span class="bi-term">pH</span></td><td><span class="bm-term">pH</span></td><td>Ukuran tahap keasidan atau kealkalian sesuatu cecair.</td></tr>
+        <tr><td><span class="bi-term">Specific Gravity</span></td><td><span class="bm-term">Graviti Tentu</span></td><td>Ukuran kepekatan zarah dalam air kencing berbanding dengan air tulen.</td></tr>
+        <tr><td><span class="bi-term">Haemoglobin</span></td><td><span class="bm-term">Hemoglobin</span></td><td>Protein dalam sel darah merah yang membawa oksigen ke seluruh badan.</td></tr>
+        <tr><td><span class="bi-term">Nitrite</span></td><td><span class="bm-term">Nitrit</span></td><td>Sebatian kimia dalam urin yang jika positif, menandakan adanya jangkitan bakteria saluran kencing.</td></tr>
+        <tr><td><span class="bi-term">Protein</span></td><td><span class="bm-term">Protein</span></td><td>Makromolekul penting; kehadirannya dalam urin secara berlebih menandakan masalah buah pinggang.</td></tr>
+        <tr><td><span class="bi-term">Bilirubin</span></td><td><span class="bm-term">Bilirubin</span></td><td>Pigmen hempedu; jika dikesan dalam urin, ia menandakan penyakit hati/saluran hempedu.</td></tr>
+        <tr><td><span class="bi-term">Ketone</span></td><td><span class="bm-term">Keton</span></td><td>Bahan kimia yang terhasil apabila badan membakar lemak untuk tenaga (bukan glukosa).</td></tr>
+        <tr><td><span class="bi-term">Cannabis</span></td><td><span class="bm-term">Ganja / Kanabis</span></td><td>Dadah yang diperoleh daripada tumbuhan kanabis; dikesan dalam ujian saringan urin.</td></tr>
+        <tr><td><span class="bi-term">Morphine</span></td><td><span class="bm-term">Morfin</span></td><td>Ubat tahan sakit yang kuat berasaskan opioid; juga disalahgunakan sebagai dadah.</td></tr>
+        <tr><td><span class="bi-term">Amphetamine</span></td><td><span class="bm-term">Amfetamin</span></td><td>Dadah perangsang sistem saraf pusat yang meningkatkan tenaga dan fokus secara tidak sihat.</td></tr>
+        <tr><td><span class="bi-term">Pregnancy Test</span></td><td><span class="bm-term">Ujian Kehamilan</span></td><td>Ujian (biasanya melalui urin) untuk mengesan kehadiran hormon hCG bagi mengesahkan kehamilan.</td></tr>
+        <tr><td><span class="bi-term">Urobilinogen</span></td><td><span class="bm-term">Urobilinogen</span></td><td>Produk sampingan hasil pemecahan bilirubin; dikesan dalam urin untuk saringan penyakit hati.</td></tr>
+        <tr><td><span class="bi-term">Total White Blood Cell (TWBC)</span></td><td><span class="bm-term">Jumlah Sel Darah Putih</span></td><td>Ukuran jumlah sel imun dalam darah yang berfungsi melawan jangkitan.</td></tr>
+        <tr><td><span class="bi-term">Total Red Blood Cell (TRBC)</span></td><td><span class="bm-term">Jumlah Sel Darah Merah</span></td><td>Ukuran jumlah keseluruhan sel pembawa oksigen di dalam darah.</td></tr>
+        <tr><td><span class="bi-term">Platelet</span></td><td><span class="bm-term">Platlet</span></td><td>Komponen darah berbentuk cakera kecil yang berfungsi membantu pembekuan darah.</td></tr>
+        <tr><td><span class="bi-term">Packed Cell Volume (PCV)</span></td><td><span class="bm-term">Isi Padu Sel Padat / Hematokrit</span></td><td>Peratusan isi padu sel darah merah berbanding keseluruhan isi padu darah.</td></tr>
+        <tr><td><span class="bi-term">MCV (Mean Corpuscular Volume)</span></td><td><span class="bm-term">Isi Padu Korpuskel Purata</span></td><td>Ukuran saiz purata sel darah merah seseorang.</td></tr>
+        <tr><td><span class="bi-term">MCH (Mean Corpuscular Hemoglobin)</span></td><td><span class="bm-term">Hemoglobin Korpuskel Purata</span></td><td>Jumlah purata hemoglobin yang terkandung dalam setiap sel darah merah.</td></tr>
+        <tr><td><span class="bi-term">MCHC</span></td><td><span class="bm-term">Kepekatan Hemoglobin Korpuskel Purata</span></td><td>Kepekatan purata hemoglobin dalam satu isi padu sel darah merah yang padat.</td></tr>
+        <tr><td><span class="bi-term">Peripheral Blood Film (PBF)</span></td><td><span class="bm-term">Filem Darah Periferi</span></td><td>Pemeriksaan calitan darah pada slaid kaca di bawah mikroskop untuk melihat rupa bentuk sel darah.</td></tr>
+        <tr><td><span class="bi-term">Reticulocytes</span></td><td><span class="bm-term">Retikulosit</span></td><td>Sel darah merah yang masih muda (belum matang), menunjukkan aktiviti penghasilan darah oleh sumsum tulang.</td></tr>
+        <tr><td><span class="bi-term">Differential White Cell (DC)</span></td><td><span class="bm-term">Sel Darah Putih Pembezaan</span></td><td>Pecahan peratusan jenis-jenis sel darah putih yang berbeza (cth: neutrofil, limfosit).</td></tr>
+        <tr><td><span class="bi-term">DIC Screening</span></td><td><span class="bm-term">Saringan DIC</span></td><td>Ujian untuk mengesan pembekuan darah meluas dalam saluran darah (Disseminated Intravascular Coagulation).</td></tr>
+        <tr><td><span class="bi-term">D-Dimer (qualitative)</span></td><td><span class="bm-term">D-Dimer (Kualitatif)</span></td><td>Ujian untuk mengesan kehadiran serpihan protein pembekuan darah (petunjuk adanya darah beku).</td></tr>
+        <tr><td><span class="bi-term">Erythrocytes Sedimentation Rate (ESR)</span></td><td><span class="bm-term">Kadar Mendapan Eritrosit</span></td><td>Ujian darah untuk mengukur kepantasan sel darah merah mendap; penanda keradangan.</td></tr>
+        <tr><td><span class="bi-term">G6PD Screening (qualitative)</span></td><td><span class="bm-term">Saringan G6PD (Kualitatif)</span></td><td>Ujian untuk melihat sama ada seseorang kekurangan enzim G6PD (pelindung sel darah merah).</td></tr>
+        <tr><td><span class="bi-term">Haemoglobinopathy Analysis</span></td><td><span class="bm-term">Analisis Hemoglobinopati</span></td><td>Ujian makmal untuk mengesan gangguan luar biasa pada struktur hemoglobin (cth: Talasemia).</td></tr>
+        <tr><td><span class="bi-term">Haemoglobin Electrophoresis</span></td><td><span class="bm-term">Elektroforesis Hemoglobin</span></td><td>Teknik makmal untuk mengasingkan dan mengenal pasti jenis-jenis hemoglobin yang berbeza dalam darah.</td></tr>
+        <tr><td><span class="bi-term">Group & Crossmatch (GXM)</span></td><td><span class="bm-term">Kumpulan Darah & Padan Silang</span></td><td>Proses menentukan kumpulan darah dan menguji keserasian antara darah penderma dan penerima.</td></tr>
+        <tr><td><span class="bi-term">Group, Screen and Hold (GSH)</span></td><td><span class="bm-term">Kumpulan, Saring dan Simpan</span></td><td>Memeriksa kumpulan darah dan saringan antibodi, serta menyimpan sampel darah untuk persediaan jika diperlukan.</td></tr>
+        <tr><td><span class="bi-term">ABO and Rh Grouping</span></td><td><span class="bm-term">Pengumpulan ABO dan Rh</span></td><td>Ujian untuk menentukan jenis kumpulan darah (A, B, AB, O) dan faktor Rhesus (+ / -).</td></tr>
+        <tr><td><span class="bi-term">Rhesus Phenotyping</span></td><td><span class="bm-term">Pemfenotipan Rhesus</span></td><td>Ujian terperinci untuk mengenal pasti antigen-antigen khusus dalam sistem kumpulan darah Rhesus.</td></tr>
+        <tr><td><span class="bi-term">Antenatal Study</span></td><td><span class="bm-term">Kajian Antenatal / Prasing</span></td><td>Ujian makmal atau saringan yang dilakukan ke atas wanita hamil sebelum melahirkan anak.</td></tr>
+        <tr><td><span class="bi-term">Neonatal Study</span></td><td><span class="bm-term">Kajian Neonatal</span></td><td>Ujian makmal atau pemeriksaan perubatan yang dilakukan ke atas bayi yang baru lahir.</td></tr>
+        <tr><td><span class="bi-term">Direct Anti Globulin Test</span></td><td><span class="bm-term">Ujian Anti Globulin Direct (Ujian Coombs)</span></td><td>Ujian untuk mengesan antibodi yang melekat pada permukaan sel darah merah (punca sel darah musnah).</td></tr>
+        <tr><td><span class="bi-term">Antibody Screening</span></td><td><span class="bm-term">Saringan Antibodi</span></td><td>Ujian untuk mengesan kehadiran antibodi luar biasa (selain ABO) dalam plasma darah.</td></tr>
+        <tr><td><span class="bi-term">Antibody Identification</span></td><td><span class="bm-term">Pengenalpastian Antibodi</span></td><td>Ujian lanjut untuk menentukan jenis spesifik antibodi luar biasa yang ditemui dalam darah.</td></tr>
+        <tr><td><span class="bi-term">Antigen Phenotyping</span></td><td><span class="bm-term">Pemfenotipan Antigen</span></td><td>Proses mengenal pasti ciri protein (antigen) khusus yang terdapat pada permukaan sel darah.</td></tr>
+        <tr><td><span class="bi-term">Investigation of Transfusion Reaction</span></td><td><span class="bm-term">Siasatan Tindak Balas Transfusi</span></td><td>Prosedur menyiasat punca kesan sampingan atau komplikasi buruk selepas pesakit menerima pemindahan darah.</td></tr>
+        <tr><td><span class="bi-term">Isohemagglutinin titre</span></td><td><span class="bm-term">Titer Isohemaglutinin</span></td><td>Ukuran kepekatan antibodi semulajadi anti-A atau anti-B di dalam darah.</td></tr>
+        <tr><td><span class="bi-term">Antibody titre</span></td><td><span class="bm-term">Titer Antibodi</span></td><td>Ukuran kepekatan atau tahap kekuatan antibodi tertentu dalam serum darah.</td></tr>
+        <tr><td><span class="bi-term">Adsorption and Elution Test</span></td><td><span class="bm-term">Ujian Adsorpsi dan Elusi</span></td><td>Teknik makmal untuk mengikat dan memisahkan antibodi daripada sel darah merah bagi tujuan pengenalpastian.</td></tr>
+        <tr><td><span class="bi-term">Saliva secretor status</span></td><td><span class="bm-term">Status Perembes Saliva</span></td><td>Ujian untuk menentukan sama ada seseorang merembeskan antigen kumpulan darah mereka ke dalam air liur.</td></tr>
+        <tr><td><span class="bi-term">Cryoprecipitate</span></td><td><span class="bm-term">Kriopresipitat</span></td><td>Komponen darah beku kaya dengan faktor pembekuan (seperti fibrinogen) untuk merawat pendarahan.</td></tr>
+        <tr><td><span class="bi-term">Cryosupernatant</span></td><td><span class="bm-term">Kriosupernatan</span></td><td>Cecair plasma baki selepas komponen kriopresipitat dikeluarkan.</td></tr>
+        <tr><td><span class="bi-term">Apheresis</span></td><td><span class="bm-term">Aferesis</span></td><td>Prosedur perubatan di mana komponen darah tertentu diambil, manakala bakinya dikembalikan semula ke badan penderma.</td></tr>
+        <tr><td><span class="bi-term">Leucocyte</span></td><td><span class="bm-term">Leukosit / Sel Darah Putih</span></td><td>Sel darah yang bertanggungjawab dalam sistem pertahanan badan menentang jangkitan.</td></tr>
+        <tr><td><span class="bi-term">HLA alloimmunization</span></td><td><span class="bm-term">Aloimunisasi HLA</span></td><td>Keadaan di mana badan menghasilkan antibodi menentang antigen HLA asing (biasanya selepas transfusi atau kehamilan).</td></tr>
+        <tr><td><span class="bi-term">Lymphocytes</span></td><td><span class="bm-term">Limfosit</span></td><td>Sejenis sel darah putih yang penting dalam sistem imun (menghasilkan antibodi dan membunuh sel dijangkiti).</td></tr>
+        <tr><td><span class="bi-term">transfusion-associated graft-versus-host disease(TA-GVHD)</span></td><td><span class="bm-term">Penyakit graf-lawan-perumah berkaitan transfusi</span></td><td>Komplikasi transfusi darah yang jarang berlaku tetapi maut, di mana sel putih penderma menyerang organ penerima.</td></tr>
+        <tr><td><span class="bi-term">Cytogenetics</span></td><td><span class="bm-term">Sitogenetik</span></td><td>Cabang genetik yang mengkaji struktur dan fungsi kromosom sel.</td></tr>
+        <tr><td><span class="bi-term">DiGeorge Syndrome</span></td><td><span class="bm-term">Sindrom DiGeorge</span></td><td>Gangguan genetik (pelenyapan kromosom 22) yang menyebabkan masalah jantung, imuniti rendah, dan lelangit rekah.</td></tr>
+        <tr><td><span class="bi-term">Prader-Willi / Angelman Syndrome</span></td><td><span class="bm-term">Sindrom Prader-Willi / Angelman</span></td><td>Gangguan genetik berkaitan kromosom 15 yang menjejaskan perkembangan fizikal dan mental anak.</td></tr>
+        <tr><td><span class="bi-term">Williams Syndrome</span></td><td><span class="bm-term">Sindrom Williams</span></td><td>Gangguan genetik yang dicirikan oleh masalah kardiovaskular, rupa paras yang unik, dan keupayaan lisan yang tinggi.</td></tr>
+        <tr><td><span class="bi-term">Bile duct</span></td><td><span class="bm-term">Saluran hempedu</span></td><td>Tiub yang membawa cecair hempedu dari hati dan pundi hempedu ke usus kecil.</td></tr>
+        <tr><td><span class="bi-term">cerebrospinal</span></td><td><span class="bm-term">Serebrospinal</span></td><td>Berkaitan dengan otak dan saraf tunjang (biasanya merujuk kepada cecair cerebrospinal - CSF).</td></tr>
+        <tr><td><span class="bi-term">pericardial</span></td><td><span class="bm-term">Perikardial</span></td><td>Berkaitan dengan perikardium, iaitu kantung atau membran yang menyelaputi jantung.</td></tr>
+        <tr><td><span class="bi-term">peritoneal</span></td><td><span class="bm-term">Peritoneal</span></td><td>Berkaitan dengan peritoneum, iaitu membran yang melapisi rongga perut.</td></tr>
+        <tr><td><span class="bi-term">pleural</span></td><td><span class="bm-term">Pleural</span></td><td>Berkaitan dengan pleura, iaitu membran yang menyelaputi paru-paru dan rongga dada.</td></tr>
+        <tr><td><span class="bi-term">sputum</span></td><td><span class="bm-term">Kahak / Sputum</span></td><td>Mukus lendir yang batuk keluar dari saluran pernafasan bawah (paru-paru).</td></tr>
+        <tr><td><span class="bi-term">Southeast Asian Ovalocytosis (SAO)</span></td><td><span class="bm-term">Ovalositosis Asia Tenggara</span></td><td>Gangguan sel darah merah keturunan yang biasa di Asia Tenggara, di mana sel darah merah berbentuk bujur.</td></tr>
+        <tr><td><span class="bi-term">Sex-determining Region Y (SRY) gene</span></td><td><span class="bm-term">Gen Kawasan Penentu Jantina Y</span></td><td>Gen pada kromosom Y yang bertanggungjawab memulakan perkembangan sifat jantina lelaki.</td></tr>
+        <tr><td><span class="bi-term">chorionic villus</span></td><td><span class="bm-term">Vilus korionik</span></td><td>Struktur unjuran kecil pada plasenta (uri) yang digunakan untuk ujian genetik janin semasa hamil.</td></tr>
+        <tr><td><span class="bi-term">Molecular Alpha Thalassemia</span></td><td><span class="bm-term">Alfa Talasemia Molekul</span></td><td>Gangguan genetik darah akibat kekurangan penghasilan rantai alfa-globin pada hemoglobin, dikesan secara molekul.</td></tr>
+        <tr><td><span class="bi-term">IMRT (Intensity Modulated Radiotherapy)</span></td><td><span class="bm-term">Radioterapi Terubah Intensiti</span></td><td>Teknik radioterapi moden yang membentuk sinar radiasi mengikut saiz tumor bagi mengurangkan kerosakan tisu sihat sekitar.</td></tr>
+    </tbody>
+</table>
+
+<div class="no-results" id="noResults">Istilah tidak ditemui. Sila cuba kata kunci yang lain.</div>
+
+<script>
+function filterGlossary() {
+    var input, filter, table, tr, tdBI, tdBM, i, txtValueBI, txtValueBM;
+    input = document.getElementById("glossarySearch");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("glossaryTable");
+    tr = table.getElementsByTagName("tr");
+    var noResults = document.getElementById("noResults");
+    var itemCount = document.getElementById("itemCount");
+    var visibleCount = 0;
+
+    for (i = 1; i < tr.length; i++) {
+        tdBI = tr[i].getElementsByTagName("td")[0];
+        tdBM = tr[i].getElementsByTagName("td")[1];
+        if (tdBI || tdBM) {
+            txtValueBI = tdBI.textContent || tdBI.innerText;
+            txtValueBM = tdBM.textContent || tdBM.innerText;
+            if (txtValueBI.toUpperCase().indexOf(filter) > -1 || txtValueBM.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                visibleCount++;
+            } else {
+                tr[i].style.display = "none";
+            }
+        }
+    }
+
+    if (visibleCount === 0) {
+        table.style.display = "none";
+        noResults.style.display = "block";
+        itemCount.textContent = "Tiada istilah sepadan";
+    } else {
+        table.style.display = "table";
+        noResults.style.display = "none";
+        itemCount.textContent = "Menemui " + visibleCount + " istilah yang sepadan";
+    }
+}
+</script>
+
+</body>
+</html>
